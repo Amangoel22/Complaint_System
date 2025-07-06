@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Engineer Dashboard</title>
+  <link rel="stylesheet" href="../css/index.css" />
+  <link rel="stylesheet" href="../css/engineer.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- header -->
+  <header class="main-header">
+    <div class="header-inner">
+      <div class="logo-box left">
+        <img src="../images/logo-left.png" alt="Left Logo" />
+      </div>
+      <div class="header-center">
+        <h1 class="title-main">अग्नि, विस्फोटक एवं पर्यावरण सुरक्षा केंद्र</h1>
+        <p class="sub-title">Centre for Fire, Explosive and Environment Safety (CFEES)</p>
+        <!-- <p class="govt-line">Ministry of Defence, Government of India</p> -->
+      </div>
+      <div class="logo-box right">
+        <img src="../images/logo-right.png" alt="Right Logo" />
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Page -->
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="profile-box">
+        <div class="avatar-box">
+          <img src="../images/default_user.jpg" alt="Profile Picture" />
+          <input type="file" id="upload-profile" />
+        </div>
+        <h3>Engineer Name</h3>
+        <p>ID: EMG10234</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="./engineerprofile.html"><i class="fas fa-user"></i> Engineer Profile</a></li>
+          <li><a href="./viewComplaint.html"><i class="fas fa-comments"></i> Complaints Record</a></li>
+          <li><a href="#logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="welcome-box">
+        <h1 class="left-align">Welcome, Engineer Name</h1>
+        <h2 class="center-align">Complaints</h2>
+      </div>
+
+
+      <div class="table-container">
+        <table class="complaint-table">
+          <thead>
+            <tr>
+              <th>Complaint ID</th>
+              <th>Phone Number</th>
+              <th>Category</th>
+              <th>Location</th>
+              <th>Status</th>
+              <th>Feedback</th>
+              <th>Resolve</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>105</td>
+              <td>9876543210</td>
+              <td>IT Services</td>
+              <td>Lab 2</td>
+
+              <td><span class="status active">Active</span></td>
+              <td><input type="text" placeholder="Enter Feedback" /></td>
+              <td><button class="resolve-btn">Resolve</button></td>
+              <td><button class="view-btn">View</button></td>
+            </tr>
+            <tr>
+              <td>106</td>
+              <td>9292929292</td>
+              <td>Hardware Issue</td>
+              <td>Lab 1</td>
+
+              <td><span class="status active">Active</span></td>
+              <td><input type="text" placeholder="Enter Feedback" /></td>
+              <td><button class="resolve-btn">Resolve</button></td>
+              <td><button class="view-btn">View</button></td>
+            </tr>
+            <tr>
+              <td>107</td>
+              <td>9876554321</td>
+              <td>Networking</td>
+              <td>Lab 2</td>
+
+              <td><span class="status active">Active</span></td>
+              <td><input type="text" placeholder="Enter Feedback" /></td>
+              <td><button class="resolve-btn">Resolve</button></td>
+              <td><button class="view-btn">View</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <p>Copyright © 2025, DRDO, Ministry of Defence, Government of India</p>
+  </footer>
+</body>
+<!-- Dynamic Complaint Modal -->
+<div class="modal" id="complaintModal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h3>Complaint Details</h3>
+    <p><strong>ID:</strong> <span id="modal-id"></span></p>
+    <p><strong>Title:</strong> <span id="modal-title"></span></p>
+    <p><strong>Date:</strong> <span id="modal-date">2025-06-20</span></p>
+    <p><strong>Time:</strong> <span id="modal-time">11:45 AM</span></p>
+    <p><strong>Remarks:</strong> <span id="modal-remarks"></span></p>
+    <p><strong>Department:</strong> <span id="modal-department"></span></p>
+    <p><strong>Cost:</strong>₹20,000/-</span></p>
+  </div>
+</div>
+
+<!-- function  -->
+<script>
+  function closeModal() {
+    document.getElementById("complaintModal").style.display = "none";
+  }
+  document.querySelectorAll(".view-btn").forEach(button => {
+    button.addEventListener("click", function () {
+      const row = button.closest("tr");
+
+      const id = row.children[0].textContent.trim();
+      const phone = row.children[1].textContent.trim();
+      const category = row.children[2].textContent.trim();
+      const location = row.children[3].textContent.trim();
+      const priority = row.children[4].textContent.trim();
+
+      document.getElementById("modal-id").textContent = `${id}`;
+      document.getElementById("modal-title").textContent = `${category} Issue`;
+      document.getElementById("modal-date").textContent = "2025-06-20";
+      document.getElementById("modal-time").textContent = "11:45 AM";
+      document.getElementById("modal-remarks").textContent = `${category} issue reported in ${location}.`;
+      document.getElementById("modal-department").textContent = category.includes("IT") ? "IT" : "Hardware";
+
+      document.getElementById("complaintModal").style.display = "block";
+    });
+  });
+
+  window.onclick = function (event) {
+    const modal = document.getElementById("complaintModal");
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+
+  // Function to handle Resolve button click--function 2
+  document.querySelectorAll(".resolve-btn").forEach(button => {
+    button.addEventListener("click", function () {
+      const row = button.closest("tr");
+
+      const statusSpan = row.querySelector(".status");
+      statusSpan.textContent = "Resolved";
+      statusSpan.classList.remove("active");
+      statusSpan.classList.add("resolved");
+      button.disabled = true;
+      alert("Complaint has been resolved.");
+    });
+  });
+
+</script>
+
+</html>
