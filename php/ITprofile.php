@@ -1,43 +1,47 @@
 <?php
 
-    $server="localhost";
-    $username="root";
-    $password="";
-    $database="cfees";
+$server = "localhost";
+$username = "root";
+$password = "";
+$database = "cfees";
 
-    $con = mysqli_connect($server, $username, $password,$database);
+$con = new mysqli($server, $username, $password, $database);
 
-    if(!$con){
-        die("connection to this database failed due to" . mysqli_connect_error());
-    }
+if ($con->connect_error) {
+    die("Connection failed: " . $con->connect_error);
+}
 
-    $sql = "SELECT id, first_name, middle_name,intercom,last_name,dob, gen, email_id, cadre_id, desig_id, internal_desig_id, group_id,
-    user_type, role,telephone_no, user_name FROM id_emp WHERE role='IT Admin'";
+$sql = $con->prepare("SELECT id, first_name, middle_name, intercom, last_name, dob, gen, email_id, cadre_id, desig_id, internal_desig_id, group_id, user_type, role, telephone_no, user_name FROM id_emp WHERE role = ?");
+$role = "IT Admin";
+$sql->bind_param("s", $role);
+$sql->execute();
 
-    $result = $con->query($sql);
+$result = $sql->get_result();
 
-    if ($result && $result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $id = htmlspecialchars($row["id"]);
-        $first_name = htmlspecialchars($row["first_name"]);
-        $middle_name = htmlspecialchars($row["middle_name"]);
-        $last_name = htmlspecialchars($row["last_name"]);
-        $gender = htmlspecialchars($row["gen"]);
-        $email_id = htmlspecialchars($row["email_id"]);
-        $cadre_id = htmlspecialchars($row["cadre_id"]);
-        $desig_id = htmlspecialchars($row["desig_id"]);
-        $internal_desig_id = htmlspecialchars($row["internal_desig_id"]);
-        $group_id = htmlspecialchars($row["group_id"]);
-        $telephone_no = htmlspecialchars($row["telephone_no"]);
-        $username = htmlspecialchars($row["user_name"]);
-        $user_type = htmlspecialchars($row["user_type"]);
-        $intercom = htmlspecialchars($row["intercom"]);
-        $dob = htmlspecialchars($row["dob"]);
-        $role = htmlspecialchars($row["role"]);
-    }
+if ($result && $result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $id = htmlspecialchars($row["id"]);
+    $first_name = htmlspecialchars($row["first_name"]);
+    $middle_name = htmlspecialchars($row["middle_name"]);
+    $last_name = htmlspecialchars($row["last_name"]);
+    $gender = htmlspecialchars($row["gen"]);
+    $email_id = htmlspecialchars($row["email_id"]);
+    $cadre_id = htmlspecialchars($row["cadre_id"]);
+    $desig_id = htmlspecialchars($row["desig_id"]);
+    $internal_desig_id = htmlspecialchars($row["internal_desig_id"]);
+    $group_id = htmlspecialchars($row["group_id"]);
+    $telephone_no = htmlspecialchars($row["telephone_no"]);
+    $username = htmlspecialchars($row["user_name"]);
+    $user_type = htmlspecialchars($row["user_type"]);
+    $intercom = htmlspecialchars($row["intercom"]);
+    $dob = htmlspecialchars($row["dob"]);
+    $role = htmlspecialchars($row["role"]);
+}
 
+$sql->close();
 $con->close();
 ?>
+
 
 <!-- HTML -->
 <!DOCTYPE html>
