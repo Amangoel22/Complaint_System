@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>View Complaints-Engineer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/index.css" />
+  <link rel="stylesheet" href="../css/viewComplaint.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="main-header">
+    <div class="header-inner">
+      <div class="logo-box left">
+        <img src="../images/logo-left.png" alt="Left Logo" />
+      </div>
+      <div class="header-center">
+        <h1 class="title-main">अग्नि, विस्फोटक एवं पर्यावरण सुरक्षा केंद्र</h1>
+        <p class="sub-title">Centre for Fire, Explosive and Environment Safety (CFEES)</p>
+        <!-- <p class="govt-line">Ministry of Defence, Government of India</p> -->
+      </div>
+      <div class="logo-box right">
+        <img src="../images/logo-right.png" alt="Right Logo" />
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Layout -->
+  <div class="page-layout">
+    <aside class="sidebar">
+      <ul>
+        <li>
+          <a href="./engineer.html">
+            <i class="fas fa-arrow-left"></i> Back To Dashboard
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- <h2 class="welcome">Welcome, Ayushi</h2> -->
+      <h3 class="section-title">Complaints-History</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Complaint ID</th>
+              <th>Employee Name</th>
+              <th>Phone Number</th>
+              <th>Title</th>
+              <th>Status</th>
+              <th>Assigned To</th>
+              <th>Review</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>100</td>
+              <td>Yukti</td>
+              <td>9876543210</td>
+              <td>System Issue</td>
+              <td>Resolved</td>
+              <td>AB Engineer</td>
+              <td>Awaiting user confirmation </td>
+
+            </tr>
+            <tr>
+              <td>101</td>
+              <td>Ayushi</td>
+              <td>9876543210</td>
+              <td>Hardware</td>
+              <td>Resolved</td>
+              <td>AB Engineer</td>
+              <td>Pending verification </td>
+            </tr>
+            <tr>
+              <td>102</td>
+              <td>Aman</td>
+              <td>9876543210</td>
+              <td>IT</td>
+              <td>Resolved</td>
+              <td>AB Engineer</td>
+              <td>Awaiting user confirmation </td>
+            </tr>
+            <!-- More rows dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- Assign Modal -->
+  <div id="assignModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Assign Engineer</h2>
+      <form id="assignForm">
+        <div class="form-group">
+          <label for="complaintId">Complaint ID:</label>
+          <input type="text" id="complaintId" name="complaintId" readonly />
+        </div>
+        <div class="form-group">
+          <label for="engineerName">Engineer Name:</label>
+          <input type="text" id="engineerName" name="engineerName" placeholder="Enter Engineer Name" required />
+        </div>
+        <div class="form-group">
+          <label for="engineerId">Engineer Employee ID:</label>
+          <input type="text" id="engineerId" name="engineerId" placeholder="Enter Engineer ID" required />
+        </div>
+        <button type="submit" class="assign-btn">Assign</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <p>Copyright © 2025, DRDO, Ministry of Defence, Government of India</p>
+  </footer>
+
+  <!-- Modal Script -->
+  <script>
+    function openModal(complaintId) {
+      document.getElementById('assignModal').style.display = 'block';
+      document.getElementById('complaintId').value = complaintId;
+    }
+
+    function closeModal() {
+      document.getElementById('assignModal').style.display = 'none';
+    }
+
+    window.onclick = function (event) {
+      const modal = document.getElementById('assignModal');
+      if (event.target == modal) {
+        closeModal();
+      }
+    };
+  </script>
+</body>
+
+</html>
