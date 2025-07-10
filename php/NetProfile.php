@@ -11,7 +11,7 @@ if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
 }
 
-$sql = $con->prepare("SELECT id, first_name, middle_name, intercom, last_name, dob, gen, email_id, cadre_id, desig_id, internal_desig_id, group_id, user_type, role, telephone_no, user_name FROM id_emp WHERE role = ?");
+$sql = $con->prepare("SELECT id,password, first_name, middle_name, intercom, last_name, dob, gen, email_id, cadre_id, desig_id, internal_desig_id, group_id, user_type, role, telephone_no, user_name FROM id_emp WHERE role = ?");
 $role = "Networking Admin";
 $sql->bind_param("s", $role);
 $sql->execute();
@@ -36,6 +36,7 @@ if ($result && $result->num_rows > 0) {
     $intercom = htmlspecialchars($row["intercom"]);
     $dob = htmlspecialchars($row["dob"]);
     $role = htmlspecialchars($row["role"]);
+    $password = htmlspecialchars($row["password"]);
 }
 
 $sql->close();
@@ -160,6 +161,10 @@ $con->close();
           <div class="group">
             <label for="uname"><i class="fa-solid fa-address-book"></i>Username:</label>
             <div class="display-field" id="uname"><?php echo $username;?></div>
+          </div>
+          <div class="group">
+            <label for="pass"><i class="fa-solid fa-address-book"></i>Password:</label>
+            <div class="display-field" id="pass"><?php echo $password;?></div>
           </div>
 
           <div class="password-wrapper">
